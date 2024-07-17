@@ -17,5 +17,12 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
         <h1>halo gaes inii adalah project pertama</h1>
+        <h1>halo gaes inii adalah project pertama</h1>
+        <h1>halo gaes inii adalah project pertama</h1>
+        <h1>halo gaes inii adalah project pertama</h1>
+
+        <h1>halo gaes inii adalah project kedua</h1>
+        <h1>halo gaes inii adalah project kedua</h1>
+        <h1>halo gaes inii adalah project kedua</h1>
     </body>
 </html>
