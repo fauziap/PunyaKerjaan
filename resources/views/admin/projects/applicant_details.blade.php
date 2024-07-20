@@ -7,7 +7,7 @@
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-10 flex flex-col gap-y-5">
-                
+
                 @if($errors->any())
                     @foreach($errors->all() as $error)
                         <div class="px-5 py-3 w-full rounded-3xl bg-red-500 text-white">
@@ -53,7 +53,7 @@
 
                     <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-orange-500 text-white">
                         WAITING FOR APPROVAL
-                    </span> 
+                    </span>
                     @elseif($projectApplicant->status == 'Rejected')
                     <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-red-500 text-white">
                         REJECTED
@@ -78,19 +78,12 @@
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M17.75 10.0196V13.9996C17.75 14.4296 17.27 14.6896 16.91 14.4496L14.99 13.1696C14.84 13.0696 14.75 12.8996 14.75 12.7196V11.2996C14.75 11.1196 14.84 10.9496 14.99 10.8496L16.91 9.56964C17.27 9.32964 17.75 9.58963 17.75 10.0196Z" fill="#292D32"/>
                         </svg>
                 <p class="text-indigo-950 text-lg font-bold">{{$projectApplicant->freelancer->email}}</p>
-                        
+
                 </div>
                 @elseif($projectApplicant->status == 'Waiting')
-                {{-- <form method="POST" action="{{route('admin.reply_applicant.update', $projectApplicant->id)}}" enctype="multipart/form-data">
-                    @csrf
-
-                    <button type="submit" class="mt-2 w-full font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
-                        Approve & Hire Now
-                    </button>
-                </form> --}}
                 <form method="POST" action="{{route('admin.project_applicants.update', $projectApplicant->id)}}" enctype="multipart/form-data">
                     @csrf
-@method('PUT')
+                    @method('PUT')
                     <button type="submit" class="mt-2 w-full font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
                         Approve & Hire Now
                     </button>
@@ -111,7 +104,7 @@
                         @endif
                     @endif
                 @endif
-                
+
             </div>
         </div>
     </div>

@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="flex flex-row items-center gap-x-3">
-                        <a href="#" class="font-bold py-4 px-6 bg-orange-500 text-white rounded-full">
+                        <a href="{{route('front.details', $project->slug)}}" class="font-bold py-4 px-6 bg-orange-500 text-white rounded-full">
                             Preview
                         </a>
                         <a href="{{route('admin.projects.tools', $project)}}" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
@@ -40,10 +40,10 @@
 
                 <h3 class="text-indigo-950 text-xl font-bold">Applicants</h3>
 
-                @forelse ($project->applicants as $aplicant)
+                @forelse ($project->applicants as $applicant)
                 <div class="flex flex-row justify-between items-center">
                     <div class="flex flex-row items-center gap-x-3">
-                        <img src=" " alt="" class="rounded-full object-cover w-[70px] h-[70px]">
+                        <img src="{{Storage::url($applicant->freelancer->avatar)}}" alt="" class="rounded-full object-cover w-[70px] h-[70px]">
                         <div class="flex flex-col">
                             <h3 class="text-indigo-950 text-xl font-bold">{{$applicant->freelancer->name}}</h3>
                             <p class="text-slate-500 text-sm">{{$applicant->freelancer->accupation}}</p>

@@ -8,9 +8,26 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTopupWalletRequest;
 use App\Http\Requests\StoreWithdrawWalletRequest;
+use App\Models\Project;
+use App\Models\ProjectApplication;
 
 class DashboardController extends Controller
 {
+
+
+    public function proposals()
+    {
+        return view('dashboard.proposals');
+    }
+
+    public function proposal_details(Project $project, ProjectApplication $projectApplicant)
+    {
+        if($projectApplicant->freelancer_id != auth()->id()){
+            abort(403, 'You are not authorized to see this page');
+        }
+        return view('dashboard.proposal_details', compact('projectApplicant', 'project'));
+    }
+
     public function wallet()
     {
         $user = Auth::user();

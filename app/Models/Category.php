@@ -11,6 +11,7 @@ class Category extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
+    protected $with = ['project'];
 
     public function project(){
         return $this->hasMany(Project::class);

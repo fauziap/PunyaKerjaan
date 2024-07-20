@@ -11,6 +11,7 @@ class Project extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
+    // protected $with = ['category','owner', 'tools', 'applicants'];
 
     public function category(){
         return $this->belongsTo(Category::class);

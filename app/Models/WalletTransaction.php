@@ -11,6 +11,7 @@ class WalletTransaction extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
+    protected $with = ['user'];
 
     public function user(){
         return $this->belongsTo(User::class);

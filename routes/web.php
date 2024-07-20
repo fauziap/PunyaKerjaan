@@ -18,6 +18,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/category/{category:slug}', [FrontController::class, 'category'])->name('front.category');
+Route::get('/details/{project:slug}', [FrontController::class, 'details'])->name('front.details');
+Route::get('/out-of-connect', [FrontController::class, 'out_of_connect'])->name('front.out_of_connect');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

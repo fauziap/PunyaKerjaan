@@ -12,6 +12,7 @@ class ProjectApplication extends Model
 
     protected $table = 'project_applications';
     protected $guarded = [];
+    protected $with = ['freelancer', 'project'];
 
     public function freelancer(){
         return $this->belongsTo(User::class, 'freelancer_id');

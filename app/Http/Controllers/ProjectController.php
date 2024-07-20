@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Validated;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\StoreToolProjectRequest;
+use App\Models\ProjectApplication;
 use App\Models\ProjectTool;
 use App\Models\Tool;
 
@@ -85,9 +86,6 @@ class ProjectController extends Controller
         return redirect()->route('admin.projects.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Project $project)
     {
         return view('admin.projects.show', compact('project'));
@@ -116,25 +114,40 @@ class ProjectController extends Controller
         return redirect()->route('admin.projects.tools', $project->id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    public function complete_project_store(ProjectApplication $projectApplicant)
+    {
+
+        DB::transaction(function() use ($projectApplicant){
+            $validated['type'] = 'Revenue';
+            $validated['is_paid'] = true ;
+            $validated['amount'] = $projectApplicant->project->budget;
+            $validated['user_id'] = $projectApplicant->freelancer_id;
+
+            $addRevenue = WalletTransaction::firstOrCreate($validated);
+
+            $projectApplicant->freelancer->wallet->increment('balance', $projectApplicant->project->budget);
+
+            $projectApplicant->project->update([
+                'has_finished' => true
+            ]);
+        });
+
+        return redirect()->route('admin.projects.show', [$projectApplicant->project, $projectApplicant->id]);
+
+    }
+
     public function edit(Project $project)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Project $project)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Project $project)
     {
         //

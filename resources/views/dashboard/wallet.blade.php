@@ -30,10 +30,11 @@
                             Request Withdraw
                         </a>
 
-
+                        @can('topup wallet')
                         <a href="{{route('dashboard.wallet.topup')}}" class="font-bold py-4 px-6 bg-green-700 text-white rounded-full">
                             Topup Wallet
                         </a>
+                        @endcan
 
                     </div>
                 </div>

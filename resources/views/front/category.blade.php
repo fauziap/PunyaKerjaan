@@ -6,13 +6,13 @@
     <section id="header" class="container max-w-[1130px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 mt-[50px]">
         <div class="flex flex-col gap-5">
             <div class="flex gap-[30px] items-center">
-                <a href="" class="last-of-type:font-semibold active:font-semibold transition-all duration-300">Browse</a>
+                <a href="{{route('front.index')}}" class="last-of-type:font-semibold active:font-semibold transition-all duration-300">Browse</a>
                 <span>/</span>
-                <a href="" class="last-of-type:font-semibold active:font-semibold transition-all duration-300">Category</a>
+                <a href="#" class="last-of-type:font-semibold active:font-semibold transition-all duration-300">Category</a>
                 <span>/</span>
-                <a href="" class="last-of-type:font-semibold active:font-semibold transition-all duration-300">Programming</a>
+                <a href="#" class="last-of-type:font-semibold active:font-semibold transition-all duration-300">{{$category->name}}</a>
             </div>
-            <h1 class="font-extrabold text-[40px] leading-[45px] text-center sm:text-left">Programming</h1>
+            <h1 class="font-extrabold text-[40px] leading-[45px] text-center sm:text-left">{{$category->name}}</h1>
         </div>
         <x-search-bar
         placeholder="Search for jobs..."
@@ -23,8 +23,8 @@
       <section id="card-container" class="container max-w-[1130px] mx-auto flex flex-col sm:flex-row sm:flex-nowrap gap-5 mt-[50px]">
         <div class="flex flex-col gap-4 w-full">
             <div class="grid sm:grid-cols-3 gap-5">
-                @forelse ($projects as $project)
-                <a href="" class="card">
+                @forelse ($category->project as $project)
+                <a href="{{route('front.details', $project)}}" class="card">
                     <div class="p-5 rounded-[20px] bg-white flex flex-col gap-5 hover:ring-2 hover:ring-[#6635F1] transition-all duration-300">
                         <div class="w-full h-[140px] rounded-[20px] overflow-hidden relative">
                             @if ($project->has_finished)
@@ -66,68 +66,7 @@
         @endforelse
             </div>
         </div>
-        <div class="flex flex-col sm:w-[300px] h-fit shrink-0 bg-white rounded-[20px] p-5 gap-[30px]">
-            <div class="flex flex-col gap-3">
-                <h3 class="font-semibold">Resources</h3>
-                <div class="flex flex-col gap-[18px]">
-                    <a href="" class="resources-card">
-                        <div class="group flex gap-3 items-center">
-                            <div class="w-[50px] h-[50px] flex shrink-0">
-                                <img src="assets/icons/perosnalcard.svg" alt="icon">
-                            </div>
-                            <div class="flex flex-col justify-center gap-[2px]">
-                                <p class="font-semibold group-hover:underline">Gawe Academy</p>
-                                <p class="text-sm text-[#545768]">Improve your skills today</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="" class="resources-card">
-                        <div class="group flex gap-3 items-center">
-                            <div class="w-[50px] h-[50px] flex shrink-0">
-                                <img src="assets/icons/note-add.svg" alt="icon">
-                            </div>
-                            <div class="flex flex-col justify-center gap-[2px]">
-                                <p class="font-semibold group-hover:underline">Invoice Marker</p>
-                                <p class="text-sm text-[#545768]">Get the payment faster</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="" class="resources-card">
-                        <div class="group flex gap-3 items-center">
-                            <div class="w-[50px] h-[50px] flex shrink-0">
-                                <img src="assets/icons/ruler&pen.svg" alt="icon">
-                            </div>
-                            <div class="flex flex-col justify-center gap-[2px]">
-                                <p class="font-semibold group-hover:underline">Assets Pixels Pro</p>
-                                <p class="text-sm text-[#545768]">Design templates</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="" class="resources-card">
-                        <div class="group flex gap-3 items-center">
-                            <div class="w-[50px] h-[50px] flex shrink-0">
-                                <img src="assets/icons/code.svg" alt="icon">
-                            </div>
-                            <div class="flex flex-col justify-center gap-[2px]">
-                                <p class="font-semibold group-hover:underline">Codelab Testing Unit</p>
-                                <p class="text-sm text-[#545768]">Development</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="" class="resources-card">
-                        <div class="group flex gap-3 items-center">
-                            <div class="w-[50px] h-[50px] flex shrink-0">
-                                <img src="assets/icons/user-octagon.svg" alt="icon">
-                            </div>
-                            <div class="flex flex-col justify-center gap-[2px]">
-                                <p class="font-semibold group-hover:underline">Interview Mocking</p>
-                                <p class="text-sm text-[#545768]">Deal with your top clients</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
+        <x-resources/>
       </section>
 </body>
 @endsection
