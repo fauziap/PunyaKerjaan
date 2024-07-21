@@ -107,7 +107,7 @@ class ProjectController extends Controller
             $validated = $request->validated();
             $validated['project_id'] = $project->id;
 
-            $toolProject = ProjectTool::firstOrCreate($validated);
+            $toolProject = ProjectTool::create($validated);
 
         });
 
