@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -17,11 +18,9 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [ ];
+    // protected $with = ['wallet', 'projects', 'proposals', ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,4 +44,23 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function wallet(){
+        return $this->hasOne(Wallet::class);
+    }
+
+    public function projects(){
+        return $this->hasMany(Project::class, 'client_id', 'id')->orderByDesc('id');
+    }
+
+    public function proposals(){
+        return $this->hasMany(ProjectApplication::class, 'freelancer_id', 'id')->orderByDesc('id');
+    }
+
+    public function hasAppliedToProject($projectId){
+        return ProjectApplication::where('project_id', $projectId)
+        ->where('freelancer_id', $this->id)
+        ->exists(); //nanti type datanya jadi true or false
+    }
+
 }
